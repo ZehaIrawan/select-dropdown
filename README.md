@@ -1,8 +1,8 @@
 Select Dropdown
 
-Usage
+# Usage
 
-Add this to package.json
+Add this to your project package.json
 
 ```
   "dependencies": {
@@ -21,4 +21,11 @@ Use it on your React Project
 import SelectDropdown from "select-dropdown";
 
 <SelectDropdown placeholder="Search here" />
+```
+
+# Running storybook
+```
+cd dev
+npm i
+npm run storybook
 ```
