@@ -1,6 +1,6 @@
 {
   "name": "select-dropdown",
-  "main": "index.js",
+  "main": "src/components/SelectDropdown",
   "private": true,
   "version": "0.0.0",
   "type": "module",
