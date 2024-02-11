@@ -1,6 +1,15 @@
 .select-input {
   border: 1px solid lightgray;
   outline: none;
+  display: flex;
+  align-items: center;
+  svg {
+    margin-left: 0.5rem;
+  }
+  input {
+    border: none;
+    outline: none;
+  }
 }
 
 .select-chips {
@@ -8,6 +17,12 @@
   height: 2rem;
   border-radius: 6px;
   display: flex;
+  padding-left: 0.5rem;
+  button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
 }
 
 .chip {
@@ -22,4 +37,14 @@
   button {
     border: none;
   }
+}
+
+.dropdown-option {
+  display: block;
+  padding: 1rem 2rem;
+  cursor: pointer;
+}
+
+.dropdown-option:hover {
+  background-color: lightgray;
 }

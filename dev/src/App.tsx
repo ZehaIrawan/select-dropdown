@@ -10,9 +10,16 @@ function App() {
 
   return (
     <>
-    <h1>With Search</h1>
+      <h1>With Search</h1>
       <SelectDropdown options={frameWorkOptions} withSearch={true} />
-    <h1>Without Search</h1>
+
+      <h1>With Search and multiple</h1>
+      <SelectDropdown
+        options={frameWorkOptions}
+        withSearch={true}
+        multiple={true}
+      />
+      <h1>Without Search</h1>
       <SelectDropdown options={frameWorkOptions} withSearch={false} />
     </>
   );
