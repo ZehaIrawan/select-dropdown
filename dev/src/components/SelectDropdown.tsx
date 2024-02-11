@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./selectdropdown.css";
 
 interface Option {
   value: string;
@@ -38,7 +39,7 @@ const SelectDropdown: React.FC<Props> = ({
   };
 
   return (
-    <div>
+    <div className="bg-tomato">
       <input
         type="text"
         value={searchString}
