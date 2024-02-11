@@ -1,3 +1,4 @@
+import React from "react";
 import SelectDropdown from "./components/SelectDropdown";
 
 function App() {
@@ -9,7 +10,10 @@ function App() {
 
   return (
     <>
-      <SelectDropdown options={frameWorkOptions} searchable={true} />
+    <h1>With Search</h1>
+      <SelectDropdown options={frameWorkOptions} withSearch={true} />
+    <h1>Without Search</h1>
+      <SelectDropdown options={frameWorkOptions} withSearch={false} />
     </>
   );
 }

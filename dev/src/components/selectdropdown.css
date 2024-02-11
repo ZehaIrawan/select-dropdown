@@ -1,3 +1,25 @@
-.bg-tomato{
-  background-color: tomato;
+.select-input {
+  border: 1px solid lightgray;
+  outline: none;
+}
+
+.select-chips {
+  border: 1px solid gray;
+  height: 2rem;
+  border-radius: 6px;
+  display: flex;
+}
+
+.chip {
+  padding: 2px 12px;
+  margin: 2px 2px;
+  background-color: lightgray;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  button {
+    border: none;
+  }
 }
