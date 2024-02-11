@@ -3,9 +3,11 @@
   outline: none;
   display: flex;
   align-items: center;
+
   svg {
     margin-left: 0.5rem;
   }
+
   input {
     border: none;
     outline: none;
@@ -17,11 +19,17 @@
   height: 2rem;
   border-radius: 6px;
   display: flex;
-  padding-left: 0.5rem;
+  align-items: center;
+  padding: 0px 0.5rem;
+
   button {
     border: none;
     background-color: transparent;
     cursor: pointer;
+  }
+
+  svg {
+    margin-left: auto;
   }
 }
 

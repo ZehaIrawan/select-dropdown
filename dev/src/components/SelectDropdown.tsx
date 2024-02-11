@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./selectdropdown.css";
-import { MagnifyingGlass, X } from "@phosphor-icons/react";
+import { MagnifyingGlass, X, CaretDown } from "@phosphor-icons/react";
 
 interface Option {
   value: string;
@@ -98,6 +98,7 @@ const SelectDropdown: React.FC<Props> = ({
             </button>
           </div>
         ))}
+        <CaretDown size={24} weight="bold" />
       </div>
 
       {withSearch && (
