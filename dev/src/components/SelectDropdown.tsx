@@ -9,11 +9,13 @@ interface Option {
 interface Props {
   options?: Option[];
   placeholder?: string;
+  searchable?: boolean;
 }
 
 const SelectDropdown: React.FC<Props> = ({
   options = [],
   placeholder = "",
+  searchable = false,
 }) => {
   const [dropdownOptions, setDropdownOptions] = useState(options);
   const [searchString, setSearchString] = useState("");
@@ -31,11 +33,12 @@ const SelectDropdown: React.FC<Props> = ({
     const { value } = event.target;
     setSearchString(value);
 
-    // Filter options based on the search string
-    const filteredOptions = options.filter((option) =>
-      option.label.toLowerCase().includes(value.toLowerCase()),
-    );
-    setDropdownOptions(filteredOptions);
+    if (searchable) {
+      const filteredOptions = options.filter((option) =>
+        option.label.toLowerCase().includes(value.toLowerCase()),
+      );
+      setDropdownOptions(filteredOptions);
+    }
   };
 
   return (

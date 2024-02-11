@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      <SelectDropdown options={frameWorkOptions} />
+      <SelectDropdown options={frameWorkOptions} searchable={true} />
     </>
   );
 }
