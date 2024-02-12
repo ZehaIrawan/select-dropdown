@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./selectdropdown.css";
-// import { MagnifyingGlass, X, CaretDown } from "@phosphor-icons/react";
+import { MagnifyingGlass, X, CaretDown } from "./Icons";
 // import Portal from "./Portal";
 
 interface Option {
@@ -156,11 +156,11 @@ const SelectDropdown: React.FC<Props> = ({
           <div key={v.label} className="chip">
             <span>{v.label}</span>
             <button onClick={() => handleRemoveSelectedValue(v.label)}>
-              {/* <X size={16} weight="bold" /> */}
+              <X size={16} />
             </button>
           </div>
         ))}
-        {/* <CaretDown size={24} weight="bold" /> */}
+        <CaretDown size={24} />
       </div>
       {withSearch && isFocused && (
         <div
@@ -168,7 +168,7 @@ const SelectDropdown: React.FC<Props> = ({
           id="select-input"
           style={{ width: selectWidth }}
         >
-          {/* <MagnifyingGlass size={24} weight="bold" /> */}
+          <MagnifyingGlass size={24} />
           <input
             className="select-input"
             type="text"
