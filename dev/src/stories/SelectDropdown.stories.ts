@@ -3,10 +3,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 import SelectDropdown from "../components/SelectDropdown";
 
 const meta = {
-  title: "Example/SelectDropdown",
+  title: "SelectDropdown",
   component: SelectDropdown,
   parameters: {
-    layout: "centered",
+    layout: "fullscreen",
   },
 } satisfies Meta<typeof SelectDropdown>;
 
@@ -20,9 +20,10 @@ const frameWorkOptions = [
   { value: "svelte", label: "Svelte" },
 ];
 
-export const Placeholder: Story = {
+export const MultipleWithoutSearch: Story = {
   args: {
     options: frameWorkOptions,
     placeholder: "Select a framework",
+    multiple: true,
   },
 };

@@ -12,22 +12,22 @@ function App() {
   return (
     <>
       {/* <h1>Without Search</h1>
-      <SelectDropdown options={frameWorkOptions} withSearch={false} />
+      <SelectDropdown options={frameWorkOptions} withSearch={false} />*/}
 
       <h1 style={{ marginTop: "1rem" }}>With Search and multiple</h1>
       <SelectDropdown
         options={frameWorkOptions}
         withSearch={true}
         multiple={true}
-      /> */}
+      />
 
-      <h1 style={{ marginTop: "1rem" }}>With Portal</h1>
+      {/* <h1 style={{ marginTop: "1rem" }}>With Portal</h1>
       <SelectDropdown
         options={frameWorkOptions}
         withSearch={true}
         multiple={true}
         withPortal={true}
-      />
+      /> */}
     </>
   );
 }

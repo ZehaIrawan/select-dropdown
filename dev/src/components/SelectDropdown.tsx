@@ -109,6 +109,8 @@ const SelectDropdown: React.FC<Props> = ({
   const dropdownRef = useRef(null);
   useOutsideAlerter(dropdownRef);
 
+  const selectWidth = document.getElementById("select-chips")?.offsetWidth;
+
   const renderDropdown = () => {
     if (isFocused) {
       let filteredOptions = dropdownOptions;
@@ -118,7 +120,10 @@ const SelectDropdown: React.FC<Props> = ({
         );
       }
       return (
-        <div className={`dropdown-options ${withSearch && "with-search"}`}>
+        <div
+          className={`dropdown-options ${withSearch && "with-search"}`}
+          style={{ width: selectWidth }}
+        >
           {filteredOptions.length > 0 ? (
             filteredOptions.map((option) => (
               <span
@@ -139,13 +144,13 @@ const SelectDropdown: React.FC<Props> = ({
   };
 
   return (
-    <div>
+    <>
       {/* Chips */}
       <div
         className={`select-chips ${isFocused ? "active" : ""}`}
         onClick={handleFocus}
         ref={dropdownRef}
-        id="lorem"
+        id="select-chips"
       >
         {_value.finalValue.map((v: Option) => (
           <div key={v.label} className="chip">
@@ -158,7 +163,11 @@ const SelectDropdown: React.FC<Props> = ({
         <CaretDown size={24} weight="bold" />
       </div>
       {withSearch && isFocused && (
-        <div className="select-input-container" id="select-input">
+        <div
+          className={`select-input-container ${isFocused ? "active" : ""}`}
+          id="select-input"
+          style={{ width: selectWidth }}
+        >
           <MagnifyingGlass size={24} weight="bold" />
           <input
             className="select-input"
@@ -179,7 +188,7 @@ const SelectDropdown: React.FC<Props> = ({
       ) : (
         renderDropdown()
       )}
-    </div>
+    </>
   );
 };
 
