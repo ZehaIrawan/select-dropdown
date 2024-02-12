@@ -24,7 +24,7 @@ const SelectDropdown: React.FC<Props> = ({
   options = [],
   placeholder = "",
   withSearch = false,
-  // multiple = false,
+  multiple = false,
   withPortal = false,
 }) => {
   const [dropdownOptions, setDropdownOptions] = useState(options);
@@ -40,17 +40,7 @@ const SelectDropdown: React.FC<Props> = ({
   };
 
   const handleSearchString = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    console.log(value, "val");
-    setSearchString(value);
-
-    // if (withSearch && value.length > 0) {
-    //   const filteredOptions = dropdownOptions.filter((option) =>
-    //     option.label.toLowerCase().includes(value.toLowerCase()),
-    //   );
-    //   console.log(filteredOptions, "f");
-    //   setDropdownOptions(filteredOptions);
-    // }
+    setSearchString(event.target.value);
   };
 
   const handleSelect = (optionValue: string) => {
@@ -58,7 +48,18 @@ const SelectDropdown: React.FC<Props> = ({
       (o) => o.value === optionValue,
     );
 
-    if (selectedOption) {
+    if (selectedOption && !multiple && _value.finalValue.length === 0) {
+      setValue((prev) => ({
+        ...prev,
+        finalValue: [...prev.finalValue, selectedOption],
+      }));
+
+      setDropdownOptions((prevOptions) =>
+        prevOptions.filter((option) => option.value !== selectedOption.value),
+      );
+    }
+
+    if (selectedOption && multiple) {
       setValue((prev) => ({
         ...prev,
         finalValue: [...prev.finalValue, selectedOption],
