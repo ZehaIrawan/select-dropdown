@@ -20,7 +20,13 @@ Use it on your React Project
 ```
 import SelectDropdown from "select-dropdown";
 
-<SelectDropdown placeholder="Search here" />
+const optionsExample = [
+    { value: "react", label: "React" },
+    { value: "ng", label: "Angular" },
+    { value: "svelte", label: "Svelte" },
+  ];
+
+<SelectDropdown placeholder="Search here" options={optionsExample}/>
 ```
 
 # Running storybook

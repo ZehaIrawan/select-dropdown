@@ -145,6 +145,7 @@ const SelectDropdown: React.FC<Props> = ({
         className={`select-chips ${isFocused ? "active" : ""}`}
         onClick={handleFocus}
         ref={dropdownRef}
+        id="lorem"
       >
         {_value.finalValue.map((v: Option) => (
           <div key={v.label} className="chip">
@@ -174,7 +175,7 @@ const SelectDropdown: React.FC<Props> = ({
         </div>
       )}
       {withPortal ? (
-        <Portal target="#root">{isFocused && renderDropdown()}</Portal>
+        <Portal target="#lorem">{isFocused && renderDropdown()}</Portal>
       ) : (
         renderDropdown()
       )}
