@@ -1,14 +1,19 @@
-.select-input {
+.select-input-container {
+  z-index: 1100;
+  position: absolute;
+  width: 100%;
   border: 1px solid lightgray;
   outline: none;
   display: flex;
   align-items: center;
 
   svg {
+    z-index: inherit;
     margin-left: 0.5rem;
   }
 
   input {
+    z-index: inherit;
     border: none;
     outline: none;
   }
@@ -61,10 +66,13 @@
   z-index: 1100;
   position: absolute;
   left: 0;
-  z-index: 10;
   background-color: white;
   width: 100%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.with-search {
+  margin-top: 36px;
 }
 
 .active {

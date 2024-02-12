@@ -24,7 +24,7 @@ const SelectDropdown: React.FC<Props> = ({
   options = [],
   placeholder = "",
   withSearch = false,
-  multiple = false,
+  // multiple = false,
   withPortal = false,
 }) => {
   const [dropdownOptions, setDropdownOptions] = useState(options);
@@ -39,20 +39,18 @@ const SelectDropdown: React.FC<Props> = ({
     setIsFocused(true);
   };
 
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
-
   const handleSearchString = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
+    console.log(value, "val");
     setSearchString(value);
 
-    if (withSearch) {
-      const filteredOptions = options.filter((option) =>
-        option.label.toLowerCase().includes(value.toLowerCase()),
-      );
-      setDropdownOptions(filteredOptions);
-    }
+    // if (withSearch && value.length > 0) {
+    //   const filteredOptions = dropdownOptions.filter((option) =>
+    //     option.label.toLowerCase().includes(value.toLowerCase()),
+    //   );
+    //   console.log(filteredOptions, "f");
+    //   setDropdownOptions(filteredOptions);
+    // }
   };
 
   const handleSelect = (optionValue: string) => {
@@ -82,21 +80,19 @@ const SelectDropdown: React.FC<Props> = ({
       (v) => v.label === selectedLabel,
     )?.[0];
 
-    console.log(removedOption, "removed option");
-
     setDropdownOptions((prev) => [...prev, removedOption]);
   };
 
   function useOutsideAlerter(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
-        console.log(event.target.classList, "event");
         if (
           ref.current &&
           !ref.current.contains(event.target) &&
           !event.target.classList.contains("dropdown-option") &&
           !event.target.classList.contains("dropdown-options") &&
-          !event.target.classList.contains("select-input")
+          !event.target.classList.contains("select-input") &&
+          !event.target.classList.contains("select-chips")
         ) {
           setIsFocused(false);
           setSearchString("");
@@ -112,27 +108,33 @@ const SelectDropdown: React.FC<Props> = ({
   const dropdownRef = useRef(null);
   useOutsideAlerter(dropdownRef);
 
-  // console.log(dropdownOptions, "dropdownOptions");
-
   const renderDropdown = () => {
-    return (
-      isFocused && (
-        <div className="dropdown-options">
-          {dropdownOptions.map((option) => (
-            <span
-              onClick={() => handleSelect(option.value)}
-              className="dropdown-option"
-              key={option.value}
-            >
-              {option.label}
-            </span>
-          ))}
-          {dropdownOptions.length === 0 && (
+    if (isFocused) {
+      let filteredOptions = dropdownOptions;
+      if (withSearch) {
+        filteredOptions = dropdownOptions.filter((option) =>
+          option.label.toLowerCase().includes(searchString.toLowerCase()),
+        );
+      }
+      return (
+        <div className={`dropdown-options ${withSearch && "with-search"}`}>
+          {filteredOptions.length > 0 ? (
+            filteredOptions.map((option) => (
+              <span
+                onClick={() => handleSelect(option.value)}
+                className="dropdown-option"
+                key={option.value}
+              >
+                {option.label}
+              </span>
+            ))
+          ) : (
             <span className="dropdown-option">No option</span>
           )}
         </div>
-      )
-    );
+      );
+    }
+    return null;
   };
 
   return (
@@ -154,7 +156,7 @@ const SelectDropdown: React.FC<Props> = ({
         <CaretDown size={24} weight="bold" />
       </div>
       {withSearch && isFocused && (
-        <div className="select-input" id="select-input">
+        <div className="select-input-container" id="select-input">
           <MagnifyingGlass size={24} weight="bold" />
           <input
             className="select-input"
@@ -167,7 +169,6 @@ const SelectDropdown: React.FC<Props> = ({
             onChange={handleSearchString}
             placeholder={placeholder}
             onFocus={handleFocus}
-            onBlur={handleBlur}
           />
         </div>
       )}
