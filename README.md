@@ -6,7 +6,7 @@ Add this to your project package.json
 
 ```
   "dependencies": {
-    "select-dropdown": "git+https://github.com/ZehaIrawan/select-dropdown.git#9791557c2278c4ae4119629b737fc63fe1f34aa7"
+    "select-dropdown": "git+https://github.com/ZehaIrawan/select-dropdown.git#e18d4f1b534b3d48d2cfcc3fe0861b97779e7a85"
   },
 ```
 
@@ -17,6 +17,7 @@ npm i
 ```
 
 Use it on your React Project
+
 ```
 import SelectDropdown from "select-dropdown";
 
@@ -30,6 +31,7 @@ const optionsExample = [
 ```
 
 # Running storybook
+
 ```
 cd dev
 npm i
