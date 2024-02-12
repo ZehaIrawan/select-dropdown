@@ -22,6 +22,13 @@ function App() {
         withPortal={true}
       />
 
+      <SelectDropdown
+        options={frameWorkOptions}
+        withSearch={true}
+        multiple={true}
+        withPortal={true}
+      />
+
       {/* <h1 style={{ marginTop: "1rem" }}>With Portal</h1>
       <SelectDropdown
         options={frameWorkOptions}

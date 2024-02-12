@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./selectdropdown.css";
 import { MagnifyingGlass, X, CaretDown } from "./Icons";
-// import Portal from "./Portal";
+import Portal from "./Portal";
 
 interface Option {
   value: string;
@@ -183,10 +183,11 @@ const SelectDropdown: React.FC<Props> = ({
           />
         </div>
       )}
-      {withPortal
-        ? // <Portal target="#lorem">{isFocused && renderDropdown()}</Portal>
-          renderDropdown()
-        : renderDropdown()}
+      {withPortal ? (
+        <Portal>{isFocused && renderDropdown()}</Portal>
+      ) : (
+        renderDropdown()
+      )}
     </>
   );
 };
