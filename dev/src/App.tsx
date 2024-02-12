@@ -1,5 +1,6 @@
 import React from "react";
 import SelectDropdown from "./components/SelectDropdown";
+import "./App.css";
 
 function App() {
   const frameWorkOptions = [
@@ -10,8 +11,8 @@ function App() {
 
   return (
     <>
-      <h1>With Search</h1>
-      <SelectDropdown options={frameWorkOptions} withSearch={true} />
+      <h1>Without Search</h1>
+      <SelectDropdown options={frameWorkOptions} withSearch={false} />
 
       <h1>With Search and multiple</h1>
       <SelectDropdown
@@ -19,8 +20,6 @@ function App() {
         withSearch={true}
         multiple={true}
       />
-      <h1>Without Search</h1>
-      <SelectDropdown options={frameWorkOptions} withSearch={false} />
     </>
   );
 }

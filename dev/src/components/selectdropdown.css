@@ -15,7 +15,7 @@
 }
 
 .select-chips {
-  border: 1px solid gray;
+  border: 1px solid lightgray;
   height: 2rem;
   border-radius: 6px;
   display: flex;
@@ -55,4 +55,18 @@
 
 .dropdown-option:hover {
   background-color: lightgray;
+}
+
+.dropdown-options {
+  z-index: 1100;
+  position: absolute;
+  left: 0;
+  z-index: 10;
+  background-color: white;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.active {
+  border: 1px solid gray;
 }

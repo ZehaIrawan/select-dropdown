@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./selectdropdown.css";
 import { MagnifyingGlass, X, CaretDown } from "@phosphor-icons/react";
+import Portal from "./Portal"; // Corrected import path
 
 interface Option {
   value: string;
@@ -12,10 +13,10 @@ interface Props {
   placeholder?: string;
   withSearch?: boolean;
   multiple?: boolean;
+  withPortal?: boolean;
 }
 
 interface Value {
-  // Define the structure of your value here, including finalValue
   finalValue: Option[];
 }
 
@@ -24,6 +25,7 @@ const SelectDropdown: React.FC<Props> = ({
   placeholder = "",
   withSearch = false,
   multiple = false,
+  withPortal = false,
 }) => {
   const [dropdownOptions, setDropdownOptions] = useState(options);
   const [searchString, setSearchString] = useState("");
@@ -38,9 +40,7 @@ const SelectDropdown: React.FC<Props> = ({
   };
 
   const handleBlur = () => {
-    setTimeout(() => {
-      setIsFocused(false);
-    }, 10);
+    setIsFocused(false);
   };
 
   const handleSearchString = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,27 +55,20 @@ const SelectDropdown: React.FC<Props> = ({
     }
   };
 
-  // console.log(isFocused, "isFocused", withSearch, "withSearch");
-
-  const handleSelect = (index: number) => {
-    // console.log("clicked");
-
-    const existingValue = _value.finalValue.find(
-      (v) => v.label === options[index].label,
+  const handleSelect = (optionValue: string) => {
+    const selectedOption: Option | undefined = dropdownOptions.find(
+      (o) => o.value === optionValue,
     );
 
-    if (!existingValue && !multiple && _value.finalValue.length === 0) {
+    if (selectedOption) {
       setValue((prev) => ({
         ...prev,
-        finalValue: [...prev.finalValue, options[index]],
+        finalValue: [...prev.finalValue, selectedOption],
       }));
-    }
 
-    if (!existingValue && multiple) {
-      setValue((prev) => ({
-        ...prev,
-        finalValue: [...prev.finalValue, options[index]],
-      }));
+      setDropdownOptions((prevOptions) =>
+        prevOptions.filter((option) => option.value !== selectedOption.value),
+      );
     }
   };
 
@@ -84,12 +77,72 @@ const SelectDropdown: React.FC<Props> = ({
       ...prev,
       finalValue: prev.finalValue.filter((v) => v.label !== selectedLabel),
     }));
+
+    const removedOption = _value.finalValue.filter(
+      (v) => v.label === selectedLabel,
+    )?.[0];
+
+    console.log(removedOption, "removed option");
+
+    setDropdownOptions((prev) => [...prev, removedOption]);
+  };
+
+  function useOutsideAlerter(ref) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        console.log(event.target.classList, "event");
+        if (
+          ref.current &&
+          !ref.current.contains(event.target) &&
+          !event.target.classList.contains("dropdown-option") &&
+          !event.target.classList.contains("dropdown-options") &&
+          !event.target.classList.contains("select-input")
+        ) {
+          setIsFocused(false);
+          setSearchString("");
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  }
+
+  const dropdownRef = useRef(null);
+  useOutsideAlerter(dropdownRef);
+
+  // console.log(dropdownOptions, "dropdownOptions");
+
+  const renderDropdown = () => {
+    return (
+      isFocused && (
+        <div className="dropdown-options">
+          {dropdownOptions.map((option) => (
+            <span
+              onClick={() => handleSelect(option.value)}
+              className="dropdown-option"
+              key={option.value}
+            >
+              {option.label}
+            </span>
+          ))}
+          {dropdownOptions.length === 0 && (
+            <span className="dropdown-option">No option</span>
+          )}
+        </div>
+      )
+    );
   };
 
   return (
     <div>
       {/* Chips */}
-      <div className="select-chips" onClick={handleFocus}>
+      <div
+        className={`select-chips ${isFocused ? "active" : ""}`}
+        onClick={handleFocus}
+        ref={dropdownRef}
+      >
         {_value.finalValue.map((v: Option) => (
           <div key={v.label} className="chip">
             <span>{v.label}</span>
@@ -100,11 +153,11 @@ const SelectDropdown: React.FC<Props> = ({
         ))}
         <CaretDown size={24} weight="bold" />
       </div>
-
-      {withSearch && (
-        <div className="select-input">
+      {withSearch && isFocused && (
+        <div className="select-input" id="select-input">
           <MagnifyingGlass size={24} weight="bold" />
           <input
+            className="select-input"
             type="text"
             value={searchString}
             style={{
@@ -118,17 +171,11 @@ const SelectDropdown: React.FC<Props> = ({
           />
         </div>
       )}
-
-      {((withSearch && isFocused) || isFocused) &&
-        dropdownOptions.map((option, index) => (
-          <span
-            onClick={() => handleSelect(index)}
-            className="dropdown-option"
-            key={option.label}
-          >
-            {option.label}
-          </span>
-        ))}
+      {withPortal ? (
+        <Portal target="#root">{isFocused && renderDropdown()}</Portal>
+      ) : (
+        renderDropdown()
+      )}
     </div>
   );
 };
