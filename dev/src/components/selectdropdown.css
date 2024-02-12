@@ -25,7 +25,7 @@
 .select-chips {
   margin: 1rem 1rem 0px 1rem;
   border: 1px solid lightgray;
-  height: 2rem;
+  height: 3rem;
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -43,9 +43,9 @@
 }
 
 .chip {
-  padding: 2px 12px;
-  margin: 2px 2px;
-  background-color: lightgray;
+  padding: 6px 12px;
+  margin: 6px 2px;
+  background-color: #dadddc;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -60,6 +60,7 @@
   display: block;
   padding: 1rem 2rem;
   cursor: pointer;
+  border-radius: 6px;
 }
 
 .dropdown-option:hover {
@@ -81,5 +82,5 @@
 }
 
 .active {
-  border: 1px solid gray;
+  border: 1px solid #a9a9a9;
 }
