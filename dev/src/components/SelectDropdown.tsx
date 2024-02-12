@@ -183,11 +183,10 @@ const SelectDropdown: React.FC<Props> = ({
           />
         </div>
       )}
-      {withPortal ? (
-        <Portal target="#lorem">{isFocused && renderDropdown()}</Portal>
-      ) : (
-        renderDropdown()
-      )}
+      {withPortal
+        ? // <Portal target="#lorem">{isFocused && renderDropdown()}</Portal>
+          renderDropdown()
+        : renderDropdown()}
     </>
   );
 };
