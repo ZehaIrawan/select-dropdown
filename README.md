@@ -6,7 +6,7 @@ Add this to your project package.json
 
 ```
   "dependencies": {
-    "select-dropdown": "git+https://github.com/ZehaIrawan/select-dropdown.git#cc9cee24bde88c5e211ec1a77744012c433f7ebc"
+    "select-dropdown": "git+https://github.com/ZehaIrawan/select-dropdown.git#9791557c2278c4ae4119629b737fc63fe1f34aa7"
   },
 ```
 
