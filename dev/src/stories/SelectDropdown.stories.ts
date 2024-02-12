@@ -20,10 +20,34 @@ const frameWorkOptions = [
   { value: "svelte", label: "Svelte" },
 ];
 
+export const MultipleWithSearch: Story = {
+  args: {
+    options: frameWorkOptions,
+    placeholder: "Select a framework",
+    multiple: true,
+    withSearch: true,
+  },
+};
+
 export const MultipleWithoutSearch: Story = {
   args: {
     options: frameWorkOptions,
     placeholder: "Select a framework",
     multiple: true,
+  },
+};
+
+export const SingleOptionWithSearch: Story = {
+  args: {
+    options: frameWorkOptions,
+    placeholder: "Select a framework",
+    withSearch: true,
+  },
+};
+
+export const SingleOptionWithoutSearch: Story = {
+  args: {
+    options: frameWorkOptions,
+    placeholder: "Select a framework",
   },
 };
